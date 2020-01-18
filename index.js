@@ -21,21 +21,22 @@ var input;
 function parseInput() {
   input = $('#mainInput').val().split('\n');
   for(let lineNumber in input){
-    StringInput(input[lineNumber], lineNumber);
+    resolved = StringInput(input[lineNumber], lineNumber);
   }
 }
 
 
 function StringInput(line, lineNumber) {
-  console.log(line, lineNumber);
+  // console.log(line, lineNumber);
   var calc = new MathCalc();
   expr  = calc.parse(line);
   if (expr .error) {
-    console.log(line + ' : ' + expr.error.text);
+    // console.log(line + ' : ' + expr.error.text);
   }
   else {
     var res = expr.eval();
-    console.log(line + ' = ' + res);
+    // console.log(line + ' = ' + res);
+    console.log(expr.scope);
     return res;
   }
 }
