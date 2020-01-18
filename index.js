@@ -18,29 +18,53 @@
  */
 
 var input;
+var varList = new Map();
+
 function parseInput() {
-  input = $('#mainInput').val().split('\n');
-  for(let lineNumber in input){
-    resolved = StringInput(input[lineNumber], lineNumber);
-  }
+    input = $('#mainInput').val().split('\n');
+    for (let lineNumber in input) {
+        StringInput(input[lineNumber], lineNumber);
+    }
 }
 
-var variables;  
+
 function StringInput(line, lineNumber) {
-  // console.log(line, lineNumber);
-  var calc = new MathCalc();
-  expr  = calc.parse(line);
-  if (expr .error) {
-    console.log(line + ' : ' + expr.error.text);
-  }
-  else {
-    var res = expr.eval();
-    // console.log(line + ' = ' + res);
-    console.log(expr.scope);
-    return res;
-  }
+    var params = line.split(" ");
+    console.log(params);
+    if (line.indexOf(" is ") > -1) {
+        var index = params.indexOf("is");
+        varList.set(params[index - 1], params[index + 1]);
+    } else {
+        var variables = new Map();
+        for (var i = 0; i < params.length; i++) {
+            if (varList.has(params[i])) {
+                console.log("here");
+                variables.set(params[i], recursiveSearch(params[i]));
+                console.log(variables);
+            }
+        }
+        console.log(variables);
+        var calc = new MathCalc();
+        expr = calc.parse(line);
+        expr.eval(variables);
+
+        if (expr.error) {
+            console.log(line + ' : ' + expr.error.text);
+        } else {
+            var res = expr.eval();
+            console.log(line + ' = ' + res);
+            return res;
+        }
+    }
+
+
 }
 
-function is(param1, param2) {
-
+function recursiveSearch(element) {
+    console.log("element: " + element + " " + varList.get(element));
+    if (typeof(varList.get(element)) == "number") {
+        return varList.get(element);
+    } else {
+        recursiveSearch(varList.get(element));
+    }
 }
