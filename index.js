@@ -17,17 +17,21 @@
 ] * 
  */
 
+var input;
 function parseInput() {
-  StringInput($('#mainInput').val().split('\n'));
+  input = $('#mainInput').val().split('\n');
+  input.forEach(line => {
+    StringInput(line);
+  });
 }
 
 
-function StringInput(input) {
-  console.log(input);
+function StringInput(text) {
+  console.log(text);
   var calc = new MathCalc();
-  expr  = calc.parse(input);
+  expr  = calc.parse(text);
   if (expr .error) {
-    alert(text + ' : ' + expr .error.text);
+    alert(text + ' : ' + expr.error.text);
   }
   else {
     var res = expr.eval();
