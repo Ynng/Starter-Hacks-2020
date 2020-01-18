@@ -20,22 +20,22 @@
 var input;
 function parseInput() {
   input = $('#mainInput').val().split('\n');
-  input.forEach(line => {
-    StringInput(line);
-  });
+  for(let lineNumber in input){
+    StringInput(input[lineNumber], lineNumber);
+  }
 }
 
 
-function StringInput(text) {
-  console.log(text);
+function StringInput(line, lineNumber) {
+  console.log(line, lineNumber);
   var calc = new MathCalc();
-  expr  = calc.parse(text);
+  expr  = calc.parse(line);
   if (expr .error) {
-    alert(text + ' : ' + expr.error.text);
+    console.log(line + ' : ' + expr.error.text);
   }
   else {
     var res = expr.eval();
-    alert(text + ' = ' + res);
+    console.log(line + ' = ' + res);
     return res;
   }
 }
