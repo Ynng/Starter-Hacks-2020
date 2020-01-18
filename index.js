@@ -25,13 +25,13 @@ function parseInput() {
   }
 }
 
-
+var variables;  
 function StringInput(line, lineNumber) {
   // console.log(line, lineNumber);
   var calc = new MathCalc();
   expr  = calc.parse(line);
   if (expr .error) {
-    // console.log(line + ' : ' + expr.error.text);
+    console.log(line + ' : ' + expr.error.text);
   }
   else {
     var res = expr.eval();
