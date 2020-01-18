@@ -23,4 +23,4 @@ function StringInput(input) {
 
 }
 
-function is(i)
+function is(param1, param2) {}
