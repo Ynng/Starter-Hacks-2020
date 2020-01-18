@@ -17,10 +17,25 @@
 ] * 
  */
 
+function parseInput() {
+  StringInput($('#mainInput').val().split('\n'));
+}
 
 
 function StringInput(input) {
-
+  console.log(input);
+  var calc = new MathCalc();
+  expr  = calc.parse(input);
+  if (expr .error) {
+    alert(text + ' : ' + expr .error.text);
+  }
+  else {
+    var res = expr.eval();
+    alert(text + ' = ' + res);
+    return res;
+  }
 }
 
-function is(param1, param2) {}
+function is(param1, param2) {
+
+}
