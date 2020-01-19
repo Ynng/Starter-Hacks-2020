@@ -1,4 +1,4 @@
-class PhysicQuestions {
+class PhysicsQuestions {
     constructor(Name, Variables, Formula) {
         this.Name = Name;
         if (Variables instanceof Array) {
@@ -10,7 +10,6 @@ class PhysicQuestions {
 }
 
 function getNames(jsonObj) {
-
     names = [];
     for (i = 0; i < jsonObj.length; i++) {
         names[i] = jsonObj[i]["Name"];
@@ -20,35 +19,31 @@ function getNames(jsonObj) {
     return names;
 
 }
+
 function getVariablesOfFunction(nameOfFunction, jsonObj) {
     arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
     for (i = 0; i < jsonObj.length; i++) {
         if (jsonObj[i]["Name"] = nameOfFunction) {
-            arrayOfMatchedName =jsonObj[i];
+            arrayOfMatchedName = jsonObj[i];
         }
     }
     console.log(arrayOfMatchedName);
-        for (i = 0; i < arrayOfMatchedName["Components"].length; i++) {
-            tempArray.push(arrayOfMatchedName["Components"][i]);
-        }
-        for (i = 0; i < tempArray.length; i++) {
-            symbolArray.push(tempArray[i]["Symbol"]);
-        }
-        console.log(symbolArray);
-        return symbolArray;
+    for (i = 0; i < arrayOfMatchedName["Components"].length; i++) {
+        tempArray.push(arrayOfMatchedName["Components"][i]);
+    }
+    for (i = 0; i < tempArray.length; i++) {
+        symbolArray.push(tempArray[i]["Symbol"]);
+    }
+    console.log(symbolArray);
+    return symbolArray;
 }
 
 
-$(document).ready(function(){
-    $.getJSON( "PhysicsQuestions.json", function( data ) {
-        getNames(data); 
+$(document).ready(function() {
+    $.getJSON("PhysicsQuestions.json", function(data) {
+        getNames(data);
         getVariablesOfFunction("Magnetic field intensity", data);
     });
 })
-
-
-
-
-
