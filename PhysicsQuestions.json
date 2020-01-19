@@ -1,18 +1,7 @@
-[
-    {
-        "Name": "Velocity",
-        "Variables": [
-            "time",
-            "distance"
-        ],
-        "Formula": "distance/time"
-    },
-    {
-        "Name": "Acceleration",
-        "Variables": [
-            "time2",
-            "distance2"
-        ],
-        "Formula": "distance/time2"
+[{
+        "Name": "Magnetic field intensity",
+        "Components": { "Magnetic_field_intensity": "B", "Current": "I", "Distance": "d" },
+        "Formula": "-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"
     }
+
 ]
