@@ -23,7 +23,7 @@ var varList = new Map();
 function parseInput() {
     input = $('#mainInput').val().split('\n');
     for (let lineNumber in input) {
-        StringInput(input[lineNumber], lineNumber);
+      $(".overlay").html($(".overlay").html+StringInput(input[lineNumber], lineNumber)+"</br>");
     }
 }
 
