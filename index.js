@@ -63,8 +63,11 @@ function addNewLine() {
 function removeLine() {
     if ($(focused).prev().length > 0) {
         $(focused).prev().attr("id", "ToBeFocused");
+        temp = $("#ToBeFocused")[0].value.length;
+        $("#ToBeFocused")[0].value = $("#ToBeFocused")[0].value + focused.val().substring(focused[0].selectionStart, focused.val().length);
         $(focused).remove();
         $("#ToBeFocused").focus();
+        $("#ToBeFocused")[0].setSelectionRange(temp, temp);
         $("#ToBeFocused").attr("id", "");
     }
 }
@@ -76,23 +79,6 @@ $(".mainInputContainer").on('keydown', function(e) {
     autocomplete = false;
     if (e.which == 17) {
         ctrl_key_down = true;
-    }
-    if (e.which == 27) {
-        removeLine();
-    }
-    if (e.which == 8 && focused.val().length == 0) {
-        e.preventDefault();
-        removeLine();
-        parseInput();
-    }
-    if (e.which == 40) {
-        if ($(focused).next().length <= 0) return;
-        e.preventDefault();
-        $(focused).next().attr("id", "ToBeFocused");
-        console.log(focused[0].selectionStart);
-        $("#ToBeFocused").focus();
-        $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
-        $("#ToBeFocused").attr("id", "");
     }
     if ($("#autocomplete-list").children().length > 0) {
         var x = document.getElementById("autocomplete-list");
@@ -119,11 +105,13 @@ $(".mainInputContainer").on('keydown', function(e) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
             }
+        } else if (e.keyCode == 27) {
+            closeAllLists();
         } else {
             autocomplete = true;
         }
     } else {
-        if (e.which == 8 && focused.val().length == 0) {
+        if (e.which == 8 && focused[0].selectionStart == 0) {
             e.preventDefault();
             removeLine();
         } else if (e.which == 40) {
@@ -177,9 +165,7 @@ function stringInput(line, focus) {
         functionName = line.substring(1, line.length);
         if (functionName == "#") return "";
         else {
-            // console.log(data)
-            // console.log(getVariablesOfFunction(functionName,data))
-            return "";
+            return getVariablesOfFunction(functionName, data).join(", ");
         }
     }
 
@@ -245,7 +231,7 @@ function autocomplete_input_change(arr, keycode) {
         // console.log(arr[i].substr(0, val.length).toUpperCase())
         // console.log(val.length)
 
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase() && (val.length != arr[i].length || val.length <= 1)) {
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
             /*make the matching letters bold:*/
