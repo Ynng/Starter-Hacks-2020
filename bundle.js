@@ -25,19 +25,16 @@ function convert(_decimal) {
 };
 
 
-var input;
-var key;
 
 
-function solve(functionName, varMap) {
-    var splitString = functionName.split(" ");
+function solve(fN, varMap, key) {
+    fN = fN.replace(key, "x");
+    var splitString = fN.split(" ");
     var substitutedStr = "";
     for (var i = 0; i < splitString.length; i++) {
         if (varMap.has(splitString[i])) {
             //console.log(knowns.get(splitString[i]));
             splitString[i] = convert(varMap.get(splitString[i]));
-        } else {
-            splitString[i] = "x";
         }
         substitutedStr += splitString[i];
         //console.log(substitutedStr);
@@ -262,8 +259,14 @@ function stringInput(line, focus) {
             }
         }
         if (variablesList.length == varMap.size + 1) {
+            var uk;
             formula = getFormula(functionName, data);
-            solve(formula, varMap);
+            for (var j = 0; j < variablesList.length; j++) {
+                if (!varMap.has(variablesList[j])) {
+                    uk = variablesList[j];
+                }
+            }
+            solve(formula, varMap, uk);
             //TODO: clear varmap when function task is ended
             varMap.clear();
 
