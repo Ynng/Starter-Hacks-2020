@@ -8,11 +8,8 @@ class PhysicQuestions {
     }
 
 }
-testJson = '[{"Name": "Magnetic field intensity","Components": [{ "Name": "Magnetic_field_intensity", "Symbol": "B" },{ "Name": "Distance", "Symbol": "d" },{ "Name": "Current", "Symbol": "I" }],"Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]}]';
-jsonObj = JSON.parse(testJson);
 
-
-function getNames() {
+function getNames(jsonObj) {
     variables = ["time", "distance"];
     variables2 = ["time2", "distance2"];
     let physicsQuestion = new PhysicQuestions('Velocity', variables, 'distance/time');
@@ -27,7 +24,7 @@ function getNames() {
     return names;
 
 }
-function getVariablesOfFunction(nameOfFunction) {
+function getVariablesOfFunction(nameOfFunction, jsonObj) {
     arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
@@ -47,6 +44,15 @@ function getVariablesOfFunction(nameOfFunction) {
         return symbolArray;
 }
 
-getNames(); 
-getVariablesOfFunction("Magnetic field intensity");
+
+$(document).ready(function(){
+    $.getJSON( "PhysicsQuestions.json", function( data ) {
+        getNames(data); 
+        getVariablesOfFunction("Magnetic field intensity", data);
+    });
+})
+
+
+
+
 
