@@ -54,35 +54,12 @@
             {
                 "Name": "Velocity",
                 "Symbol": "v"
-            }
-        ],
-        "Formula": ["v * T"]
-    },
-    {
-        "Name": "Velocity",
-        "Components": [{
-                "Name": "Change in Time",
-                "Symbol": "T"
-            },
-            {
+            }, {
                 "Name": "Displacement",
                 "Symbol": "D"
             }
         ],
-        "Formula": ["D / T"]
-    },
-    {
-        "Name": "Change in Time",
-        "Components": [{
-                "Name": "Displacement",
-                "Symbol": "D"
-            },
-            {
-                "Name": "Velocity",
-                "Symbol": "v"
-            }
-        ],
-        "Formula": ["D / v"]
+        "Formula": ["-1 * D + v * T"]
     },
     {
         "Name": "Acceleration",
@@ -97,9 +74,13 @@
             {
                 "Name": "Change in Time",
                 "Symbol": "T"
+            },
+            {
+                "Name": "Acceleration",
+                "Symbol": "a"
             }
         ],
-        "Formula": ["Vf / T - Vi / T"]
+        "Formula": ["-1* a + Vf / T - Vi / T"]
     },
     {
         "Name": "Average Acceleration",
@@ -114,8 +95,12 @@
             {
                 "Name": "Change in Time",
                 "Symbol": "T"
+            },
+            {
+                "Name": "Average Acceleration",
+                "Symbol": "a"
             }
         ],
-        "Formula": ["Vf / 2 + Vi / 2"]
+        "Formula": ["-1 * a + Vf / 2 + Vi / 2"]
     }
 ]
