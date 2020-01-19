@@ -21,9 +21,11 @@ var input;
 var varList = new Map();
 
 function parseInput() {
+
     input = $('#mainInput').val().split('\n');
+    $(".overlay").html("");
     for (let lineNumber in input) {
-        $(".overlay").html($(".overlay").html + StringInput(input[lineNumber], lineNumber) + "</br>");
+        $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
     }
 }
 
