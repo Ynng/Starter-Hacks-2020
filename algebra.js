@@ -26,7 +26,7 @@ var input;
 var key;
 var knowns;
 
-function takeInput(strInput, key, knowns) {
+function solve(strInput, key, knowns) {
     input = strInputs;
     this.key = key;
     this.knowns = knowns;
@@ -44,7 +44,7 @@ function takeInput(strInput, key, knowns) {
 
 var Algebrite = require('algebrite');
 
-function compute() {
+function compute(functionName) {
     var splitString = input.split(" ");
     var substitutedStr = "";
     for (var i = 0; i < splitString.length; i++) {

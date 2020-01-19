@@ -9,7 +9,7 @@ var data;
 /*An array containing all the country names in the world:*/
 var autoCompleteList, functionsList, variablesList;
 
-$.getJSON("PhysicsQuestions.json", function (jsonData) {
+$.getJSON("PhysicsQuestions.json", function(jsonData) {
     data = jsonData;
     functionsList = autoCompleteList = getNames(jsonData);
 });
@@ -19,6 +19,7 @@ function findWord(word, str) {
 }
 
 var iBackup;
+
 function parseInput() {
     input = $('.mainInput');
     scope = {};
@@ -40,12 +41,12 @@ function updateFocused() {
     }
 }
 
-$(document).on('keydown, keyup, mousedown, mouseup', function () {
+$(document).on('keydown, keyup, mousedown, mouseup', function() {
     updateFocused();
     $('#box').css({ 'left': (letter_size * focused[0].selectionStart) + 'px', 'top': $(focused).offset().top + $(focused).height() });
 })
 
-$(document).ready(function () {
+$(document).ready(function() {
     $(".mainInput")[0].focus();
     updateFocused();
 })
@@ -71,13 +72,13 @@ function removeLine() {
 //   parseInput();
 // });
 
-$(".mainInputContainer").on('keydown', function (e) {
+$(".mainInputContainer").on('keydown', function(e) {
     autocomplete = false;
     if (e.which == 17) {
         ctrl_key_down = true;
     }
-    if(e.which == 27){
-      removeLine();
+    if (e.which == 27) {
+        removeLine();
     }
     if (e.which == 8 && focused.val().length == 0) {
         e.preventDefault();
@@ -125,8 +126,7 @@ $(".mainInputContainer").on('keydown', function (e) {
         if (e.which == 8 && focused.val().length == 0) {
             e.preventDefault();
             removeLine();
-        }
-        else if (e.which == 40) {
+        } else if (e.which == 40) {
             if ($(focused).next().length <= 0) return;
             e.preventDefault();
             $(focused).next().attr("id", "ToBeFocused");
@@ -134,8 +134,7 @@ $(".mainInputContainer").on('keydown', function (e) {
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
-        }
-        else if (e.which == 38) {
+        } else if (e.which == 38) {
             if ($(focused).prev().length <= 0) return;
             e.preventDefault();
             $(focused).prev().attr("id", "ToBeFocused");
@@ -143,8 +142,7 @@ $(".mainInputContainer").on('keydown', function (e) {
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
-        }
-        else if (e.which == 13) {
+        } else if (e.which == 13) {
             //enter key
             addNewLine();
         } else {
@@ -154,7 +152,7 @@ $(".mainInputContainer").on('keydown', function (e) {
 
 })
 
-$(".mainInputContainer").on('keyup', function (e) {
+$(".mainInputContainer").on('keyup', function(e) {
 
     if (e.which == 17) {
         ctrl_key_down = false;
@@ -171,6 +169,7 @@ var oldScope = {};
 
 var oldFunctionName = "#";
 var functionName = "#";
+var varMap = new Map();
 
 function stringInput(line, focus) {
     if (line.length <= 0 && !focus) return "";
@@ -201,20 +200,33 @@ function stringInput(line, focus) {
         if (focus) {
             if (oldFunctionName != functionName) {
                 console.log("changed auto complete to variables")
-                // console.log(getVariablesOfFunction(functionName, data));
+                    // console.log(getVariablesOfFunction(functionName, data));
                 variablesList = getVariablesOfFunction(functionName, data);
                 autoCompleteList = variablesList;
                 oldFunctionName = functionName;
             }
         }
-        return "";
-        // TODO: solveAlgebra(functionName,)
+    }
+    if (functionName != "#") {
+        if (variablesList.length > varMap.size + 1) {
+            var splitStr = line.split("=")
+            if (focus && splitStr.length > 1 && splitStr[1] != "") {
+                varMap.set(splitStr[0], splitStr[1]);
+            }
+        }
+        if (variablesList.length == varMap.size + 1) {
+            solve(functionName, varMap);
+            //TODO: clear varmap when function task is ended
+            varMap.clear();
+
+        }
     }
 }
 
 
 var currentFocus;
 var autocomplete = false;
+
 function autocomplete_input_change(arr, keycode) {
     var a, b, i, val = focused.val();
     /*close any already open lists of autocompleted values*/
@@ -242,7 +254,7 @@ function autocomplete_input_change(arr, keycode) {
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function (e) {
+            b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 $(focused)[0].value = this.children[1].value;
                 /*close the list of autocompleted values,
@@ -266,12 +278,14 @@ function addActive(x) {
     /*add class "autocomplete-active":*/
     x[currentFocus].classList.add("autocomplete-active");
 }
+
 function removeActive(x) {
     /*a function to remove the "active" class from all autocomplete items:*/
     for (var i = 0; i < x.length; i++) {
         x[i].classList.remove("autocomplete-active");
     }
 }
+
 function closeAllLists(elmnt) {
     // console.log(focused[0])
     /*close all autocomplete lists in the document,
@@ -284,6 +298,6 @@ function closeAllLists(elmnt) {
     }
 }
 /*execute a function when someone clicks in the document:*/
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function(e) {
     closeAllLists(e.target);
 });
