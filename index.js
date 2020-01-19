@@ -4,6 +4,14 @@ var output;
 // var varList = new Map();
 
 var ctrl_key_down = false;
+
+$(document).ready(function() {
+    $.getJSON("PhysicsQuestions.json", function(data) {
+        getNames(data);
+        getVariablesOfFunction("Magnetic field intensity", data);
+    });
+})
+
 function findWord(word, str) {
     return RegExp('\\b' + word + '\\b').test(str)
 }
