@@ -21,37 +21,51 @@ function convert(_decimal) {
     }
 };
 
-var Algebrite = require('algebrite');
 
-var input = "-1 * B + u0 * I / 2 / pi / d";
+var input;
+var key;
+var knowns;
 
-var key = "I"; //UNKMNOWN VARIABLE
-input = input.replace(key, "x");
-var knowns = new Map();
-knowns.set("B", 5.1);
-knowns.set("u0", 0.7);
-knowns.set("pi", 3.14);
-knowns.set("d", 0.5);
-var splitString = input.split(" ");
-var substitutedStr = "";
-for (var i = 0; i < splitString.length; i++) {
-    if (knowns.has(splitString[i])) {
-        //console.log(knowns.get(splitString[i]));
-        splitString[i] = convert(knowns.get(splitString[i]));
-    }
-    substitutedStr += splitString[i];
-    //console.log(substitutedStr);
+function takeInput(strInput, key, knowns) {
+    input = strInputs;
+    this.key = key;
+    this.knowns = knowns;
 
+    this.input = "-1 * B + u0 * I / 2 / pi / d";
+
+    this.key = "I"; //UNKMNOWN VARIABLE
+    this.input = input.replace(key, "x");
+    this.knowns = new Map();
+    this.knowns.set("B", 5.1);
+    this.knowns.set("u0", 0.7);
+    this.knowns.set("pi", 3.14);
+    this.knowns.set("d", 0.5);
 }
 
-//THIS IS WHERE YOU OUTPUT THJE SOLUTION TO THE UI
-var sol = Algebrite.nroots(substitutedStr);
-//console.log(sol);
-if (sol.tensor == null) {
-    //console.log(sol.d);
-} else {
-    for (var i = 0; i < sol.tensor.elem.length; i++) {
-        //for when x has more than 1 answer
-        // console.log(sol.tensor.elem[i].d);
+var Algebrite = require('algebrite');
+
+function compute() {
+    var splitString = input.split(" ");
+    var substitutedStr = "";
+    for (var i = 0; i < splitString.length; i++) {
+        if (knowns.has(splitString[i])) {
+            //console.log(knowns.get(splitString[i]));
+            splitString[i] = convert(knowns.get(splitString[i]));
+        }
+        substitutedStr += splitString[i];
+        //console.log(substitutedStr);
+
+    }
+
+    //THIS IS WHERE YOU OUTPUT THJE SOLUTION TO THE UI
+    var sol = Algebrite.nroots(substitutedStr);
+    //console.log(sol);
+    if (sol.tensor == null) {
+        //console.log(sol.d);
+    } else {
+        for (var i = 0; i < sol.tensor.elem.length; i++) {
+            //for when x has more than 1 answer
+            // console.log(sol.tensor.elem[i].d);
+        }
     }
 }
