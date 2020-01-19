@@ -75,13 +75,47 @@
         "Name": "Change in Time",
         "Components": [{
                 "Name": "Displacement",
-                "Symbol": "T"
+                "Symbol": "D"
             },
             {
                 "Name": "Velocity",
                 "Symbol": "v"
             }
         ],
-        "Formula": ["D / T"]
+        "Formula": ["D / ="]
+    },
+    {
+        "Name": "Acceleration",
+        "Components": [{
+                "Name": "Initial Velocity",
+                "Symbol": "Vi"
+            },
+            {
+                "Name": "Final Velocity",
+                "Symbol": "Vf"
+            },
+            {
+                "Name": "Change in Time",
+                "Symbol": "T"
+            }
+        ], 
+        "Formula": ["Vf / T - Vi / T"]
+    },
+    {
+        "Name": "Average Acceleration",
+        "Components": [{
+                "Name": "Initial Velocity",
+                "Symbol": "Vi"
+            },
+            {
+                "Name": "Final Velocity",
+                "Symbol": "Vf"
+            },
+            {
+                "Name": "Change in Time",
+                "Symbol": "T"
+            }
+        ], 
+        "Formula": ["Vf / 2 + Vi / 2"]
     }
 ]
