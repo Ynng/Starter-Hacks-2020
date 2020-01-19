@@ -16,7 +16,7 @@
  * Define electric_potential as V
 ] * 
  */
-
+var letter_size = 6;
 var input;
 var output;
 // var varList = new Map();
@@ -44,6 +44,7 @@ var focused;
 
 $(document).on('keydown, keyup, mousedown, mouseup', function () {
   focused = $(':focus');
+  $('#box').css({'left': (letter_size*focused[0].selectionStart)+'px', 'top':$(focused).offset().top+$(focused).height()});
 })
 
 $(document).ready(function(){
@@ -105,6 +106,8 @@ $(".mainInputContainer").on('keyup', function (e) {
     addNewLine();
   }
   focused = $(':focus');
+  $('#box').css({'left': (letter_size*focused[0].selectionStart)+'px', 'top':$(focused).offset().top+$(focused).height()});
+
 });
 
 var scope = {};
