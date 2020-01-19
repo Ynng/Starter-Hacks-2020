@@ -1,3 +1,4 @@
+//PROVIDE INPUT TO THIS FILE
 function gcd(a, b) {
     return (b) ? gcd(b, a % b) : a;
 }
