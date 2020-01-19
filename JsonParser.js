@@ -28,11 +28,17 @@ function getNames() {
 
 }
 function getVariablesOfFunction(nameOfFunction) {
+    arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
-    console.log(jsonObj[0]["Components"].length);
-        for (i = 0; i < jsonObj[0]["Components"].length; i++) {
-            tempArray.push(jsonObj[0]["Components"][i]);
+    for (i = 0; i < jsonObj.length; i++) {
+        if (jsonObj[i]["Name"] = nameOfFunction) {
+            arrayOfMatchedName =jsonObj[i];
+        }
+    }
+    console.log(arrayOfMatchedName);
+        for (i = 0; i < arrayOfMatchedName["Components"].length; i++) {
+            tempArray.push(arrayOfMatchedName["Components"][i]);
         }
         for (i = 0; i < tempArray.length; i++) {
             symbolArray.push(tempArray[i]["Symbol"]);
@@ -41,6 +47,6 @@ function getVariablesOfFunction(nameOfFunction) {
         return symbolArray;
 }
 
-writeObjToJson(); 
-getVariablesOfFunction();
+getNames(); 
+getVariablesOfFunction("Magnetic field intensity");
 
