@@ -23,7 +23,7 @@ var varList = new Map();
 function parseInput() {
     input = $('#mainInput').val().split('\n');
     for (let lineNumber in input) {
-      $(".overlay").html($(".overlay").html+StringInput(input[lineNumber], lineNumber)+"</br>");
+        $(".overlay").html($(".overlay").html + StringInput(input[lineNumber], lineNumber) + "</br>");
     }
 }
 
@@ -46,15 +46,15 @@ function StringInput(line, lineNumber) {
         console.log(variables);
         var calc = new MathCalc();
         expr = calc.parse(line);
-        expr.eval(variables);
+        console.log(expr.eval(variables));
 
-        if (expr.error) {
-            console.log(line + ' : ' + expr.error.text);
-        } else {
-            var res = expr.eval();
-            console.log(line + ' = ' + res);
-            return res;
-        }
+        // if (expr.error) {
+        //     console.log(line + ' : ' + expr.error.text);
+        // } else {
+        //     var res = expr.eval();
+        //     console.log(line + ' = ' + res);
+        //     return res;
+        // }
     }
 
 
@@ -62,7 +62,7 @@ function StringInput(line, lineNumber) {
 
 function recursiveSearch(element) {
     console.log("element: " + element + " " + varList.get(element));
-    if (typeof(varList.get(element)) == "number") {
+    if (Number(element) != NaN) {
         return varList.get(element);
     } else {
         recursiveSearch(varList.get(element));
