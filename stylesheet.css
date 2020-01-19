@@ -31,7 +31,7 @@ body {
   height: 100%;
   left: 99%;
   transform: translateX(-100%);
-  z-index: 1000000;
+  z-index: 1000;
   position: absolute;
   width: 100%;
   text-align: right;
@@ -79,3 +79,5 @@ body {
 .mainInput{
   border: 0;  
 }
+
+#box { width: 100px; height: 2em; position: absolute; top: 35px; left: 0px; background: lightgrey; z-index: 100000;} 
