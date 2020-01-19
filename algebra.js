@@ -1,2 +1,3 @@
 var Algebrite = require('algebrite');
-console.log(Algebrite.run('x+x'));
+console.log(Algebrite.factor('10!').toString());
+console.log("test");
