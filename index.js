@@ -76,6 +76,23 @@ $(".mainInputContainer").on('keydown', function (e) {
     if (e.which == 17) {
         ctrl_key_down = true;
     }
+    if(e.which == 27){
+      removeLine();
+    }
+    if (e.which == 8 && focused.val().length == 0) {
+        e.preventDefault();
+        removeLine();
+        parseInput();
+    }
+    if (e.which == 40) {
+        if ($(focused).next().length <= 0) return;
+        e.preventDefault();
+        $(focused).next().attr("id", "ToBeFocused");
+        console.log(focused[0].selectionStart);
+        $("#ToBeFocused").focus();
+        $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
+        $("#ToBeFocused").attr("id", "");
+    }
     if ($("#autocomplete-list").children().length > 0) {
         var x = document.getElementById("autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
