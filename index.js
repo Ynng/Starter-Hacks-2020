@@ -111,7 +111,7 @@ $(".mainInputContainer").on('keydown', function(e) {
             autocomplete = true;
         }
     } else {
-        if (e.which == 8 && focused[0].selectionStart == 0) {
+        if (e.which == 8 && focused[0].selectionStart == 0 && focused[0].selectionEnd == 0) {
             e.preventDefault();
             removeLine();
         } else if (e.which == 40) {
