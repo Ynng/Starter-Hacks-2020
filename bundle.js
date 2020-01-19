@@ -28,7 +28,7 @@ function convert(_decimal) {
 
 
 function solve(fN, varMap, key) {
-    while(fN.indexOf(key)>-1){
+    while (fN.indexOf(key) > -1) {
         fN = fN.replace(key, "x");
     }
     var splitString = fN.split(" ");
@@ -49,10 +49,10 @@ function solve(fN, varMap, key) {
     if (sol.tensor == null) {
         return sol.d;
     } else {
-        tempA="";
+        tempA = "";
         for (var i = 0; i < sol.tensor.elem.length; i++) {
             //for when x has more than 1 answer
-            tempA=tempA + ", " + sol.tensor.elem[i].d;
+            tempA = tempA + ", " + sol.tensor.elem[i].d;
         }
         return tempA;
     }
@@ -271,7 +271,13 @@ function stringInput(line, focus) {
     }
     if (functionName != "#") {
         if (variablesList.length > varMap.size + 1) {
-            var splitStr = line.split("=")
+            var splitStr;
+            if (line.indexOf(" is ") > -1) {
+                splitStr = line.split(" is ");
+
+            } else {
+                splitStr = line.split("=");
+            }
             if (splitStr.length > 1 && splitStr[1] != "") {
                 varMap.set(splitStr[0].trim(), splitStr[1].trim());
             }
