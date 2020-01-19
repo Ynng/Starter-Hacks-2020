@@ -17,15 +17,22 @@
 ] * 
  */
 
-var input;
-var varList = new Map();
+var input, output;
+// var varList = new Map();
+
+function findWord(word, str) {
+  return RegExp('\\b' + word + '\\b').test(str)
+}
 
 function parseInput() {
-
   input = $('#mainInput').val().split('\n');
+  scope = {};
   $(".overlay").html("");
   for (let lineNumber in input) {
-    $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
+    output = StringInput(input[lineNumber], lineNumber);
+    if (!findWord("function", output)){
+      $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
+    } 
   }
 }
 
@@ -48,7 +55,7 @@ function StringInput(line, lineNumber) {
   // console.log(variables);
   // var calc = new MathCalc();
   // expr = calc.parse(line);
-  return math.eval(line,scope);
+  return math.eval(line, scope);
 
   // if (expr.error) {
   //     console.log(line + ' : ' + expr.error.text);
