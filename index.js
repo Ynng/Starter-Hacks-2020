@@ -50,9 +50,24 @@ function addNewLine() {
   $('<input class="mainInput" type="text">').insertAfter(focused)
 }
 
+function removeLine(){
+  if($(focused).prev().length>0){
+    $(focused).prev().attr("id","ToBeFocused");
+    $(focused).remove();
+    $("#ToBeFocused").focus();
+    $("#ToBeFocused").attr("id","");
+  }
+}
 // $(".mainInput").on('input', function () {
 //   parseInput();
 // });
+$(".mainInputContainer").on('keydown', function(e){
+  if (e.which == 8 && focused.val().length==0 ) {
+    e.preventDefault();
+    removeLine();
+    parseInput();
+  }
+})
 
 $(".mainInputContainer").on('keyup', function (e) {
   console.log(e.which)
@@ -60,6 +75,7 @@ $(".mainInputContainer").on('keyup', function (e) {
   if (e.which == 13) {
     //enter key
     addNewLine();
+    parseInput();
     $(focused).next().focus();
   }
   if (e.which == 40) {
@@ -90,7 +106,7 @@ function StringInput(line, lineNumber) {
   // console.log(variables);
   // var calc = new MathCalc();
   // expr = calc.parse(line);
-  if (line.length <= 0) return "empty";
+  if (line.length <= 0) return "";
   try {
     return math.eval(line, scope);
   } catch (e) {
