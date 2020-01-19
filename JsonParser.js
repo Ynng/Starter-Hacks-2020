@@ -10,7 +10,7 @@ class PhysicQuestions {
 }
 function writeObjToJson() {
     variables = ["time", "distance"];
-    Let physicsQuestion = new PhysicQuestions('Velocity', variables, 'distance/time');
-    //sad
+    let physicsQuestion = new PhysicQuestions('Velocity', variables, 'distance/time');
+    //sad really sad
 
 }
