@@ -34,8 +34,6 @@ function solve(functionName, varMap) {
         if (varMap.has(splitString[i])) {
             //console.log(knowns.get(splitString[i]));
             splitString[i] = convert(varMap.get(splitString[i]));
-        } else {
-            splitString[i] = "x";
         }
         substitutedStr += splitString[i];
         //console.log(substitutedStr);

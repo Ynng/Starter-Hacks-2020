@@ -23,8 +23,12 @@ function convert(_decimal) {
     }
 };
 
-function solve(functionName, varMap) {
-    var splitString = functionName.split(" ");
+
+
+
+function solve(fN, varMap, key) {
+    fN = fN.replace(key, "x");
+    var splitString = fN.split(" ");
     var substitutedStr = "";
     for (var i = 0; i < splitString.length; i++) {
         if (varMap.has(splitString[i])) {
@@ -162,7 +166,7 @@ $(".mainInputContainer").on('keydown', function(e) {
             autocomplete = true;
         }
     } else {
-        if (e.which == 8 && focused[0].selectionStart == 0 && focused[0].selectionEnd == 0) {
+        if (e.which == 8 && focused[0].selectionStart == 0) {
             e.preventDefault();
             removeLine();
         } else if (e.which == 40) {
@@ -254,14 +258,14 @@ function stringInput(line, focus) {
             }
         }
         if (variablesList.length == varMap.size + 1) {
-            var key;
-            for (var j = 0; j < varMap.size) {
+            var uk;
+            formula = getFormula(functionName, data);
+            for (var j = 0; j < variablesList.length; j++) {
                 if (!varMap.has(variablesList[j])) {
-                    key = variablesList[j];
+                    uk = variablesList[j];
                 }
             }
-            formula = getFormula(functionName, data);
-            solve(formula, varMap, key);
+            solve(formula, varMap, uk);
             //TODO: clear varmap when function task is ended
             varMap.clear();
 
