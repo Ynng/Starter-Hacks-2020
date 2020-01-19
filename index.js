@@ -190,6 +190,9 @@ function stringInput(line, focus) {
                 variablesList = getVariablesOfFunction(functionName, data);
                 autoCompleteList = variablesList;
                 oldFunctionName = functionName;
+                
+                formula = getFormula(functionName, data);
+                //console.log(formula);
             }
         }
     }
