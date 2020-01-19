@@ -40,10 +40,3 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
     return symbolArray;
 }
 
-
-$(document).ready(function() {
-    $.getJSON("PhysicsQuestions.json", function(data) {
-        getNames(data);
-        getVariablesOfFunction("Magnetic field intensity", data);
-    });
-})
