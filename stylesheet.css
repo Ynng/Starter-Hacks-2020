@@ -12,11 +12,18 @@ body {
   height: 80vh;
 }
 
+.col{
+  padding: 0 !important;
+}
+
 .overlay {
   color: #fff;
   pointer-events: none;
-  width: 96%;
+  position: relative;
   height: 100%;
+  left: 99%;
+  transform: translateX(-100%);
+  z-index: 1000000;
   position: absolute;
   text-align: right;
 }
