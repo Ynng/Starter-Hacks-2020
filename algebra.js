@@ -1,2 +1,2 @@
 var Algebrite = require('algebrite');
-Algebrite.run('x+x');
+console.log(Algebrite.run('x+x'));
