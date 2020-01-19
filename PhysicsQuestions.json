@@ -82,7 +82,7 @@
                 "Symbol": "v"
             }
         ],
-        "Formula": ["D / ="]
+        "Formula": ["D / v"]
     },
     {
         "Name": "Acceleration",
