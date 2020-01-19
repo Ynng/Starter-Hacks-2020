@@ -41,3 +41,4 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
     return symbolArray;
 }
 
+
