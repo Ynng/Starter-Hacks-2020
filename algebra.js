@@ -51,6 +51,6 @@ if (sol.tensor == null) {
 } else {
     for (var i = 0; i < sol.tensor.elem.length; i++) {
         //for when x has more than 1 answer
-       // console.log(sol.tensor.elem[i].d);
+        // console.log(sol.tensor.elem[i].d);
     }
 }
