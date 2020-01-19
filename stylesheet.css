@@ -4,6 +4,10 @@ body {
   width: 100vw;
 }
 
+.overlay, .mainInputContainer .mainInput{
+  font-size: 150%;
+}
+
 .mainInput {
   background: #313131;
   color: #fff;
