@@ -1,9 +1,31 @@
 [{
-    "Name": "Magnetic field intensity",
-    "Components": [
-        { "Name": "Magnetic_field_intensity", "Symbol": "B" },
-        { "Name": "Distance", "Symbol": "d" },
-        { "Name": "Current", "Symbol:": "I" }
-    ],
-    "Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
-}]
+        "Name": "Magnetic field intensity",
+        "Components": [
+            { "Name": "Magnetic_field_intensity", "Symbol": "B" },
+            { "Name": "Distance", "Symbol": "d" },
+            { "Name": "Current", "Symbol:": "I" }
+        ],
+        "Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
+    },
+    {
+        "Name": "Gravitational force",
+        "Components": [{
+                "Name": "Mass 1",
+                "Symbol": "M"
+            },
+            {
+                "Name": "Mass 2",
+                "Symbol": "m"
+            },
+            {
+                "Name": "Distance",
+                "Symbol": "r"
+            },
+            {
+                "Name": "Gravitational force",
+                "Symbol": "F"
+            }
+        ],
+        "Formula": ["-F + 6.674 * 10 ^ -11 * M * m / r ^ 2"]
+    }
+]
