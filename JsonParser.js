@@ -8,6 +8,10 @@ class PhysicQuestions {
     }
 
 }
+testJson = '[{"Name": "Velocity","Variables": ["time","distance"],"Formula": "distance/time"},{"Name": "Acceleration","Variables": ["time2","distance2"],"Formula": "distance/time2"}]';
+jsonObj = JSON.parse(testJson);
+
+
 function writeObjToJson() {
     variables = ["time", "distance"];
     variables2 = ["time2", "distance2"];
@@ -15,11 +19,15 @@ function writeObjToJson() {
     let physicsQuestion2 = new PhysicQuestions('Acceleration', variables, 'distance/time2');
     var arr = [physicsQuestion, physicsQuestion2];
     names = [];
-    for (i = 0; i < arr.length; i++) {
-        names[i] = arr[i]["Name"];
+    for (i = 0; i < jsonObj.length; i++) {
+        names[i] = jsonObj[i]["Name"];
     }
-    console.log(name);
-    return name;
+    console.log(jsonObj);
+    console.log(names);
+    return names;
+
+}
+function getVariablesOfFunction(nameOfFunction) {
 
 }
 
