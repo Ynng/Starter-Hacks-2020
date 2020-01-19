@@ -5,6 +5,6 @@ class PhysicQuestions {
             this.Variables = Variables.slice();
         }
         this.Formula = Formula;
-      }
-      
+    }
+
 }
