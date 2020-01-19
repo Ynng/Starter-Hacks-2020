@@ -85,3 +85,21 @@ function recursiveSearch(element) {
     recursiveSearch(varList.get(element));
   }
 }
+
+var lineNumber = 1;
+function addNewLine(){
+  $("div.input-row").insertAfter();
+
+  
+  $(".main-textfield").append("<div class='input-row' contenteditable='true'></div>");
+  $(".line-number").append("<div>"+lineNumber+"</div>");
+  lineNumber++;
+  $(".input-row").keyup(function(event){
+    event.preventDefault();
+    if(event.which==13){
+      console.log('entered');
+      addNewLine();
+    }
+  });
+}
+addNewLine();
