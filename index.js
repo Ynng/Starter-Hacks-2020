@@ -255,7 +255,7 @@ function stringInput(line, focus) {
         }
         if (variablesList.length == varMap.size + 1) {
             var key;
-            for (var j = 0; j < varMap.size) {
+            for (var j = 0; j < varMap.size; j++) {
                 if (!varMap.has(variablesList[j])) {
                     key = variablesList[j];
                 }
