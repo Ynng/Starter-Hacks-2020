@@ -48,7 +48,7 @@ function StringInput(line, lineNumber) {
         console.log(variables);
         var calc = new MathCalc();
         expr = calc.parse(line);
-        console.log(expr.eval(variables));
+        return expr.eval(variables);
 
         // if (expr.error) {
         //     console.log(line + ' : ' + expr.error.text);
