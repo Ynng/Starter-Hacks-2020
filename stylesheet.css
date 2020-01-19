@@ -82,7 +82,8 @@ body {
 }
 
 #box {
-  width: 100px;
+  width: 10em;
+  font-size: 0.9em;
   /*height: 2em;*/
   position: absolute;
   top: 35px;

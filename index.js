@@ -25,11 +25,18 @@ function parseInput() {
     scope = {};
     $(".overlay").html("");
     for (i = 0; i < input.length; i++) {
-        // console.log($(input[i]).val())
-        output = StringInput($(input[i]).val(), i);
-
-        if (!findWord("function", output)) {
-            $(".overlay").html($(".overlay").html() + output + "</br>");
+        if ($(input[i]).val().length <= 0) {
+            $(".overlay").html($(".overlay").html() + "</br>");
+            continue;
+        }
+        else if ($(input[i]).val().substring(0, 1) == "#") {
+            $(".overlay").html($(".overlay").html() + "</br>");
+        }else{
+            output = StringInput($(input[i]).val(), i);
+    
+            if (!findWord("function", output)) {
+                $(".overlay").html($(".overlay").html() + output + "</br>");
+            }
         }
     }
 }
@@ -188,7 +195,7 @@ function autocomplete_input_change(arr, keycode) {
     for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
         // console.log(arr[i].substr(0, val.length).toUpperCase())
-        console.log(val)
+        // console.log(val)
 
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             /*create a DIV element for each matching element:*/
