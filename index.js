@@ -154,6 +154,7 @@ var oldScope = {};
 
 var oldFunctionName = "#";
 var functionName = "#";
+var formula = "";
 
 function stringInput(line, focus) {
     if (line.length <= 0 && !focus) return "";
@@ -186,6 +187,9 @@ function stringInput(line, focus) {
                 variablesList = getVariablesOfFunction(functionName, data);
                 autoCompleteList = variablesList;
                 oldFunctionName = functionName;
+                
+                formula = getFormula(functionName, data);
+                //console.log(formula);
             }
         }
         return "";
