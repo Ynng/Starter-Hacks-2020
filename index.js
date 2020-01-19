@@ -5,9 +5,14 @@ var output;
 
 var ctrl_key_down = false;
 var data;
-$.getJSON("PhysicsQuestions.json", function(data) {
+
+/*An array containing all the country names in the world:*/
+var autoCompleteList;
+
+$.getJSON("PhysicsQuestions.json", function (data) {
     this.data = data;
-    console.log(this.data);
+    autoCompleteList = getNames(data);
+    console.log(autoCompleteList);
 });
 
 function findWord(word, str) {
@@ -67,17 +72,17 @@ function removeLine() {
 // $(".mainInput").on('input', function () {
 //   parseInput();
 // });
+
 $(".mainInputContainer").on('keydown', function (e) {
-    if(e.which == 17){
+    autocomplete = false;
+    if (e.which == 17) {
         ctrl_key_down = true;
     }
-    if($("#autocomplete-list").children().length>0){
+    if ($("#autocomplete-list").children().length > 0) {
         var x = document.getElementById("autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
-        // console.log(x)
         if (e.keyCode == 40) {
             e.preventDefault();
-    
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
             currentFocus++;
@@ -85,7 +90,7 @@ $(".mainInputContainer").on('keydown', function (e) {
             addActive(x);
         } else if (e.keyCode == 38) { //up
             e.preventDefault();
-    
+
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
@@ -99,16 +104,15 @@ $(".mainInputContainer").on('keydown', function (e) {
                 if (x) x[currentFocus].click();
             }
         } else {
-            autocomplete_input_change(autoCompleteList, e.keyCode);
+            autocomplete = true;
         }
-    }else{
-        autocomplete_input_change(autoCompleteList, e.keyCode);
+    } else {
         if (e.which == 8 && focused.val().length == 0) {
             e.preventDefault();
             removeLine();
             parseInput();
         }
-        if (e.which == 40) {
+        else if (e.which == 40) {
             if ($(focused).next().length <= 0) return;
             e.preventDefault();
             $(focused).next().attr("id", "ToBeFocused");
@@ -116,9 +120,8 @@ $(".mainInputContainer").on('keydown', function (e) {
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
-            autocomplete = true;
         }
-        if (e.which == 38) {
+        else if (e.which == 38) {
             if ($(focused).prev().length <= 0) return;
             e.preventDefault();
             $(focused).prev().attr("id", "ToBeFocused");
@@ -126,20 +129,23 @@ $(".mainInputContainer").on('keydown', function (e) {
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
-            autocomplete = true;
         }
-        if (e.which == 13) {
+        else if (e.which == 13) {
             //enter key
             addNewLine();
+        } else {
+            autocomplete = true;
         }
     }
-    
+
 })
 
 $(".mainInputContainer").on('keyup', function (e) {
-    if(e.which == 17){
+
+    if (e.which == 17) {
         ctrl_key_down = false;
     }
+    if (autocomplete) autocomplete_input_change(autoCompleteList, e.which);
     parseInput();
     $('#box').css({ 'left': (letter_size * focused[0].selectionStart) + 'px', 'top': $(focused).offset().top + $(focused).height() });
     // console.log(e.which)
@@ -151,10 +157,10 @@ var oldScope = {};
 
 function StringInput(line, lineNumber) {
     if (line.length <= 0) return "";
-    if (line[0] == '#') {
-        line.substring(1,line.length);
-        solveAlgebra();
-    }
+    // if (line[0] == '#') {
+    //     line.substring(1,line.length);
+    //     solveAlgebra();
+    // }
 
     try {
         return math.eval(line, scope);
@@ -164,17 +170,10 @@ function StringInput(line, lineNumber) {
 }
 
 
-/*An array containing all the country names in the world:*/
-var autoCompleteList = getNames(data);
-
 var currentFocus;
 var autocomplete = false;
 function autocomplete_input_change(arr, keycode) {
-    if(ctrl_key_down){
-        var a, b, i, val = focused.val();
-    }else{
-        var a, b, i, val = focused.val() + String.fromCharCode(keycode);
-    }
+    var a, b, i, val = focused.val();
     /*close any already open lists of autocompleted values*/
     closeAllLists();
     if (!val) { return false; }
@@ -188,6 +187,9 @@ function autocomplete_input_change(arr, keycode) {
     /*for each item in the array...*/
     for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
+        // console.log(arr[i].substr(0, val.length).toUpperCase())
+        console.log(val)
+
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");

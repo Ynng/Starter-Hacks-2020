@@ -12,7 +12,7 @@ class PhysicsQuestions {
 function getNames(jsonObj) {
     names = [];
     for (i = 0; i < jsonObj.length; i++) {
-        names[i] = jsonObj[i]["Name"];
+        names[i] = "#" + jsonObj[i]["Name"];
     }
     console.log(jsonObj);
     console.log(names);
