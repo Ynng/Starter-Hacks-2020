@@ -12,7 +12,7 @@ class PhysicsQuestions {
 function getNames(jsonObj) {
     names = [];
     for (i = 0; i < jsonObj.length; i++) {
-        names[i] = jsonObj[i]["Name"];
+        names[i] = "#" + jsonObj[i]["Name"];
     }
     console.log(jsonObj);
     console.log(names);
@@ -40,10 +40,3 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
     return symbolArray;
 }
 
-
-$(document).ready(function() {
-    $.getJSON("PhysicsQuestions.json", function(data) {
-        getNames(data);
-        getVariablesOfFunction("Magnetic field intensity", data);
-    });
-})
