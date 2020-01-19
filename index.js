@@ -204,6 +204,7 @@ function stringInput(line, focus) {
             }
         }
         if (variablesList.length == varMap.size + 1) {
+            var formula = data
             solve(functionName, varMap);
             //TODO: clear varmap when function task is ended
             varMap.clear();
