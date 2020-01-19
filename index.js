@@ -50,7 +50,7 @@ $(document).ready(function () {
 })
 
 function addNewLine() {
-    console.log(focused[0].selectionStart);
+    // console.log(focused[0].selectionStart);
     $('<input class="mainInput" type="text">').insertAfter(focused);
     parseInput();
     $(focused).next()[0].defaultValue = focused.val().substring(focused[0].selectionStart, focused.val().length);
@@ -76,7 +76,7 @@ $(".mainInputContainer").on('keydown', function (e) {
     if($("#autocomplete-list").children().length>0){
         var x = document.getElementById("autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
-        console.log(x)
+        // console.log(x)
         if (e.keyCode == 40) {
             e.preventDefault();
     
@@ -114,7 +114,7 @@ $(".mainInputContainer").on('keydown', function (e) {
             if ($(focused).next().length <= 0) return;
             e.preventDefault();
             $(focused).next().attr("id", "ToBeFocused");
-            console.log(focused[0].selectionStart);
+            // console.log(focused[0].selectionStart);
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
@@ -124,7 +124,7 @@ $(".mainInputContainer").on('keydown', function (e) {
             if ($(focused).prev().length <= 0) return;
             e.preventDefault();
             $(focused).prev().attr("id", "ToBeFocused");
-            console.log(focused[0].selectionStart);
+            // console.log(focused[0].selectionStart);
             $("#ToBeFocused").focus();
             $("#ToBeFocused")[0].setSelectionRange(focused[0].selectionStart, focused[0].selectionStart);
             $("#ToBeFocused").attr("id", "");
@@ -152,23 +152,6 @@ var scope = {};
 var oldScope = {};
 
 function StringInput(line, lineNumber) {
-    // var params = line.split(" ");
-    // console.log(params);
-    // if (line.indexOf(" is ") > -1) {
-    //     var index = params.indexOf("is");
-    //     varList.set(params[index - 1], params[index + 1]);
-    // } else {
-    //     var variables = new Map();
-    //     for (var i = 0; i < params.length; i++) {
-    //         if (varList.has(params[i])) {
-    //             console.log("here");
-    //             variables.set(params[i], recursiveSearch(params[i]));
-    //             console.log(variables);
-    //         }
-    //     }
-    // console.log(variables);
-    // var calc = new MathCalc();
-    // expr = calc.parse(line);
     if (line.length <= 0) return "";
     if (line[0] == '#') {
         //TODO: pass shit from jsonparser to here
@@ -180,17 +163,6 @@ function StringInput(line, lineNumber) {
     } catch (e) {
         return "❗️error"
     }
-
-    // if (expr.error) {
-    //     console.log(line + ' : ' + expr.error.text);
-    // } else {
-    //     var res = expr.eval();
-    //     console.log(line + ' = ' + res);
-    //     return res;
-    // }
-    // }
-
-
 }
 
 
