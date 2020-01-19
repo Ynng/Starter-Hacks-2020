@@ -86,7 +86,12 @@ function parseInput() {
     $(".overlay").html("");
     functionName = "#";
     varMap.clear();
+    nextLine="";
     for (ij = 0; ij < input.length; ij++) {
+        if(nextLine.length>0){
+            input[ij].value="";
+            console.log("runned")
+        }
         output = stringInput($(input[ij]).val(), $(input[ij]).is(":focus"));
         if (!findWord("function", output)) {
             $(".overlay").html($(".overlay").html() + output + "</br>");
@@ -219,9 +224,16 @@ var oldScope = {};
 var oldFunctionName = "#";
 var functionName = "#";
 var varMap = new Map();
-
+var nextLine, tempC;
 function stringInput(line, focus) {
-    if (line.length <= 0 && !focus) return "";
+    
+    if (line.length <= 0 && !focus && nextLine.length<=0) return "";
+    console.log("tempC",nextLine);
+    if(nextLine.length>0){
+        tempC = nextLine;
+        nextLine="";
+        return tempC;
+    }
     if (line[0] == '#' && line.length > 1) {
         functionName = line.substring(1, line.length);
         if (functionName == "#") return "";
@@ -262,22 +274,25 @@ function stringInput(line, focus) {
             var splitStr = line.split("=")
             if (splitStr.length > 1 && splitStr[1] != "") {
                 varMap.set(splitStr[0].trim(), splitStr[1].trim());
+            }
+            if (variablesList.length == varMap.size + 1) {
+                var uk;
+                formula = getFormula(functionName, data);
+                for (var j = 0; j < variablesList.length; j++) {
+                    if (!varMap.has(variablesList[j])) {
+                        uk = variablesList[j];
+                    }
+                }
+                tempB = solve(formula, varMap, uk);
+                nextLine = tempB.toString();
+                console.log(nextLine);
+                //TODO: clear varmap when function task is ended
+            }
+            if (splitStr.length > 1 && splitStr[1] != "") {
                 return splitStr[1].trim();
             }
-            return "";
-        }
-        if (variablesList.length == varMap.size + 1) {
-            var uk;
-            formula = getFormula(functionName, data);
-            for (var j = 0; j < variablesList.length; j++) {
-                if (!varMap.has(variablesList[j])) {
-                    uk = variablesList[j];
-                }
-            }
-            tempB = solve(formula, varMap, uk);
-            return tempB;
-            //TODO: clear varmap when function task is ended
-
+        }else{
+            return ""
         }
     }
 }
