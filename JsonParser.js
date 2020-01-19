@@ -8,11 +8,11 @@ class PhysicQuestions {
     }
 
 }
-testJson = '[{"Name": "Velocity","Variables": ["time","distance"],"Formula": "distance/time"},{"Name": "Acceleration","Variables": ["time2","distance2"],"Formula": "distance/time2"}]';
+testJson = '[{"Name": "Magnetic field intensity","Components": [{ "Name": "Magnetic_field_intensity", "Symbol": "B" },{ "Name": "Distance", "Symbol": "d" },{ "Name": "Current", "Symbol": "I" }],"Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]}]';
 jsonObj = JSON.parse(testJson);
 
 
-function writeObjToJson() {
+function getNames() {
     variables = ["time", "distance"];
     variables2 = ["time2", "distance2"];
     let physicsQuestion = new PhysicQuestions('Velocity', variables, 'distance/time');
@@ -28,7 +28,19 @@ function writeObjToJson() {
 
 }
 function getVariablesOfFunction(nameOfFunction) {
-
+    tempArray = [];
+    symbolArray = [];
+    console.log(jsonObj[0]["Components"].length);
+        for (i = 0; i < jsonObj[0]["Components"].length; i++) {
+            tempArray.push(jsonObj[0]["Components"][i]);
+        }
+        for (i = 0; i < tempArray.length; i++) {
+            symbolArray.push(tempArray[i]["Symbol"]);
+        }
+        console.log(symbolArray);
+        return symbolArray;
 }
 
-writeObjToJson();
+writeObjToJson(); 
+getVariablesOfFunction();
+
