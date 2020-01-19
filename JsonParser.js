@@ -11,8 +11,8 @@ class PhysicsQuestions {
 
 function getNames(jsonObj) {
     names = [];
-    for (i = 0; i < jsonObj.length; i++) {
-        names[i] = "#" + jsonObj[i]["Name"];
+    for (j = 0; j < jsonObj.length; j++) {
+        names[j] = "#" + jsonObj[j]["Name"];
     }
     console.log(jsonObj);
     console.log(names);
@@ -21,20 +21,21 @@ function getNames(jsonObj) {
 }
 
 function getVariablesOfFunction(nameOfFunction, jsonObj) {
+    console.log(jsonObj)
     arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
-    for (i = 0; i < jsonObj.length; i++) {
-        if (jsonObj[i]["Name"] = nameOfFunction) {
-            arrayOfMatchedName = jsonObj[i];
+    for (j = 0; j < jsonObj.length; j++) {
+        if (jsonObj[j]["Name"] == nameOfFunction) {
+            arrayOfMatchedName = jsonObj[j];
         }
     }
     console.log(arrayOfMatchedName);
-    for (i = 0; i < arrayOfMatchedName["Components"].length; i++) {
-        tempArray.push(arrayOfMatchedName["Components"][i]);
+    for (j = 0; j < arrayOfMatchedName["Components"].length; j++) {
+        tempArray.push(arrayOfMatchedName["Components"][j]);
     }
-    for (i = 0; i < tempArray.length; i++) {
-        symbolArray.push(tempArray[i]["Symbol"]);
+    for (j = 0; j < tempArray.length; j++) {
+        symbolArray.push(tempArray[j]["Symbol"]);
     }
     console.log(symbolArray);
     return symbolArray;

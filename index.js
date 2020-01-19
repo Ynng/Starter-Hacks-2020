@@ -7,36 +7,27 @@ var ctrl_key_down = false;
 var data;
 
 /*An array containing all the country names in the world:*/
-var autoCompleteList;
+var autoCompleteList, functionsList, variablesList;
 
-$.getJSON("PhysicsQuestions.json", function (data) {
-    this.data = data;
-    autoCompleteList = getNames(data);
-    console.log(autoCompleteList);
+$.getJSON("PhysicsQuestions.json", function (jsonData) {
+    data = jsonData;
+    functionsList = autoCompleteList = getNames(jsonData);
 });
 
 function findWord(word, str) {
     return RegExp('\\b' + word + '\\b').test(str)
 }
 
-
+var iBackup;
 function parseInput() {
     input = $('.mainInput');
     scope = {};
     $(".overlay").html("");
-    for (i = 0; i < input.length; i++) {
-        if ($(input[i]).val().length <= 0) {
-            $(".overlay").html($(".overlay").html() + "</br>");
-            continue;
-        }
-        else if ($(input[i]).val().substring(0, 1) == "#") {
-            $(".overlay").html($(".overlay").html() + "</br>");
-        }else{
-            output = StringInput($(input[i]).val(), i);
-    
-            if (!findWord("function", output)) {
-                $(".overlay").html($(".overlay").html() + output + "</br>");
-            }
+    functionName = "#";
+    for (ij = 0; ij < input.length; ij++) {
+        output = stringInput($(input[ij]).val(), $(input[ij]).is(":focus"));
+        if (!findWord("function", output)) {
+            $(".overlay").html($(".overlay").html() + output + "</br>");
         }
     }
 }
@@ -62,7 +53,7 @@ $(document).ready(function () {
 function addNewLine() {
     // console.log(focused[0].selectionStart);
     $('<input class="mainInput" type="text">').insertAfter(focused);
-    parseInput();
+    // parseInput();
     $(focused).next()[0].defaultValue = focused.val().substring(focused[0].selectionStart, focused.val().length);
     $(focused)[0].value = focused.val().substring(0, focused[0].selectionStart);
     $(focused).next().focus();
@@ -117,7 +108,6 @@ $(".mainInputContainer").on('keydown', function (e) {
         if (e.which == 8 && focused.val().length == 0) {
             e.preventDefault();
             removeLine();
-            parseInput();
         }
         else if (e.which == 40) {
             if ($(focused).next().length <= 0) return;
@@ -162,17 +152,46 @@ $(".mainInputContainer").on('keyup', function (e) {
 var scope = {};
 var oldScope = {};
 
-function StringInput(line, lineNumber) {
-    if (line.length <= 0) return "";
-    // if (line[0] == '#') {
-    //     line.substring(1,line.length);
-    //     solveAlgebra();
-    // }
+var oldFunctionName = "#";
+var functionName = "#";
 
-    try {
-        return math.eval(line, scope);
-    } catch (e) {
-        return "❗️error"
+function stringInput(line, focus) {
+    if (line.length <= 0 && !focus) return "";
+    if (line[0] == '#' && line.length > 1) {
+        functionName = line.substring(1, line.length);
+        if (functionName == "#") return "";
+        else {
+            // console.log(data)
+            // console.log(getVariablesOfFunction(functionName,data))
+            return "";
+        }
+    }
+
+    if (functionName == "#") {
+        if (focus) {
+            if (oldFunctionName != functionName) {
+                console.log("changed auto complete to functions")
+                autoCompleteList = functionsList;
+                oldFunctionName = functionName;
+            }
+        }
+        try {
+            return math.eval(line, scope);
+        } catch (e) {
+            return "❗️error"
+        }
+    } else {
+        if (focus) {
+            if (oldFunctionName != functionName) {
+                console.log("changed auto complete to variables")
+                // console.log(getVariablesOfFunction(functionName, data));
+                variablesList = getVariablesOfFunction(functionName, data);
+                autoCompleteList = variablesList;
+                oldFunctionName = functionName;
+            }
+        }
+        return "";
+        // TODO: solveAlgebra(functionName,)
     }
 }
 
@@ -195,7 +214,7 @@ function autocomplete_input_change(arr, keycode) {
     for (i = 0; i < arr.length; i++) {
         /*check if the item starts with the same letters as the text field value:*/
         // console.log(arr[i].substr(0, val.length).toUpperCase())
-        // console.log(val)
+        // console.log(val.length)
 
         if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             /*create a DIV element for each matching element:*/
@@ -220,7 +239,7 @@ function autocomplete_input_change(arr, keycode) {
 }
 
 function addActive(x) {
-    console.log(x);
+    // console.log(x);
     /*a function to classify an item as "active":*/
     if (!x) return false;
     /*start by removing the "active" class on all items:*/

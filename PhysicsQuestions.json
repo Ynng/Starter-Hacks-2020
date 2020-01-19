@@ -3,7 +3,7 @@
         "Components": [
             { "Name": "Magnetic_field_intensity", "Symbol": "B" },
             { "Name": "Distance", "Symbol": "d" },
-            { "Name": "Current", "Symbol:": "I" }
+            { "Name": "Current", "Symbol": "I" }
         ],
         "Formula": ["-1 * B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
     },
