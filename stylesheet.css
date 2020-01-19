@@ -75,3 +75,5 @@ body {
 .mainInput{
   border: 0;  
 }
+
+#box { width: 100px; height: 15px; position: absolute; top: 35px; left: 0px; background: lightgrey;}
