@@ -3,7 +3,7 @@ function gcd(a, b) {
 }
 
 function convert(_decimal) {
-    console.log(_decimal);
+    //console.log(_decimal);
     if (_decimal == parseInt(_decimal)) {
         return _decimal;
     } else {
@@ -35,19 +35,22 @@ var splitString = input.split(" ");
 var substitutedStr = "";
 for (var i = 0; i < splitString.length; i++) {
     if (knowns.has(splitString[i])) {
-        console.log(knowns.get(splitString[i]));
+        //console.log(knowns.get(splitString[i]));
         splitString[i] = convert(knowns.get(splitString[i]));
     }
     substitutedStr += splitString[i];
-    console.log(substitutedStr);
+    //console.log(substitutedStr);
 
 }
+
+//THIS IS WHERE YOU OUTPUT THJE SOLUTION TO THE UI
 var sol = Algebrite.nroots(substitutedStr);
-console.log(sol);
+//console.log(sol);
 if (sol.tensor == null) {
-    console.log(sol.d);
+    //console.log(sol.d);
 } else {
     for (var i = 0; i < sol.tensor.elem.length; i++) {
-        console.log(sol.tensor.elem[i].d);
+        //for when x has more than 1 answer
+       // console.log(sol.tensor.elem[i].d);
     }
 }
