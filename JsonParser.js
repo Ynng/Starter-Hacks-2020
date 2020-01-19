@@ -8,11 +8,8 @@ class PhysicQuestions {
     }
 
 }
-testJson = '[{"Name": "Magnetic field intensity","Components": [{ "Name": "Magnetic_field_intensity", "Symbol": "B" },{ "Name": "Distance", "Symbol": "d" },{ "Name": "Current", "Symbol": "I" }],"Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]}]';
-jsonObj = JSON.parse(testJson);
 
-
-function getNames() {
+function getNames(jsonObj) {
     variables = ["time", "distance"];
     variables2 = ["time2", "distance2"];
     let physicsQuestion = new PhysicQuestions('Velocity', variables, 'distance/time');
@@ -27,12 +24,18 @@ function getNames() {
     return names;
 
 }
-function getVariablesOfFunction(nameOfFunction) {
+function getVariablesOfFunction(nameOfFunction, jsonObj) {
+    arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
-    console.log(jsonObj[0]["Components"].length);
-        for (i = 0; i < jsonObj[0]["Components"].length; i++) {
-            tempArray.push(jsonObj[0]["Components"][i]);
+    for (i = 0; i < jsonObj.length; i++) {
+        if (jsonObj[i]["Name"] = nameOfFunction) {
+            arrayOfMatchedName =jsonObj[i];
+        }
+    }
+    console.log(arrayOfMatchedName);
+        for (i = 0; i < arrayOfMatchedName["Components"].length; i++) {
+            tempArray.push(arrayOfMatchedName["Components"][i]);
         }
         for (i = 0; i < tempArray.length; i++) {
             symbolArray.push(tempArray[i]["Symbol"]);
@@ -41,6 +44,15 @@ function getVariablesOfFunction(nameOfFunction) {
         return symbolArray;
 }
 
-writeObjToJson(); 
-getVariablesOfFunction();
+
+$(document).ready(function(){
+    $.getJSON( "PhysicsQuestions.json", function( data ) {
+        getNames(data); 
+        getVariablesOfFunction("Magnetic field intensity", data);
+    });
+})
+
+
+
+
 
