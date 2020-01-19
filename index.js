@@ -47,22 +47,27 @@ $(document).on('keydown, keyup, mousedown, mouseup', function () {
 })
 
 function addNewLine() {
-  $('<input class="mainInput" type="text">').insertAfter(focused)
+  console.log(focused[0].selectionStart);
+  $('<input class="mainInput" type="text">').insertAfter(focused);
+  parseInput();
+  $(focused).next()[0].defaultValue=focused.val().substring(focused[0].selectionStart,focused.val().length);
+  $(focused)[0].value=focused.val().substring(0,focused[0].selectionStart);
+  $(focused).next().focus();
 }
 
-function removeLine(){
-  if($(focused).prev().length>0){
-    $(focused).prev().attr("id","ToBeFocused");
+function removeLine() {
+  if ($(focused).prev().length > 0) {
+    $(focused).prev().attr("id", "ToBeFocused");
     $(focused).remove();
     $("#ToBeFocused").focus();
-    $("#ToBeFocused").attr("id","");
+    $("#ToBeFocused").attr("id", "");
   }
 }
 // $(".mainInput").on('input', function () {
 //   parseInput();
 // });
-$(".mainInputContainer").on('keydown', function(e){
-  if (e.which == 8 && focused.val().length==0 ) {
+$(".mainInputContainer").on('keydown', function (e) {
+  if (e.which == 8 && focused.val().length == 0) {
     e.preventDefault();
     removeLine();
     parseInput();
@@ -75,8 +80,6 @@ $(".mainInputContainer").on('keyup', function (e) {
   if (e.which == 13) {
     //enter key
     addNewLine();
-    parseInput();
-    $(focused).next().focus();
   }
   if (e.which == 40) {
     $(focused).next().focus();
@@ -110,7 +113,7 @@ function StringInput(line, lineNumber) {
   try {
     return math.eval(line, scope);
   } catch (e) {
-    return "error"
+    return "❗️error"
   }
 
   // if (expr.error) {
