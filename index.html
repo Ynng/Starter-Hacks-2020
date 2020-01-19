@@ -15,22 +15,16 @@
 
 <body>
   <div class="container">
-    <div class="row">   
+    <div class="row">
       <div class="col">
         <div class="overlay">
-
         </div>
-        <textarea rows="10" cols="100" id="mainInput" oninput="parseInput()"></textarea>
+        <form autocomplete="off" class="mainInputContainer">
+          <input class="mainInput" type="text">
+        </form>
       </div>
     </div>
   </div>
-
-  <form autocomplete="off" action="/action_page.php">
-    <div class="autocomplete" style="width:300px;">
-      <input id="myInput" type="text" name="myCountry" placeholder="Country">
-    </div>
-    <input type="submit">
-  </form>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -47,7 +41,7 @@
   <script src="bundle.js"></script>
   <script src="autoComplete.js"></script>
 
-<!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete -->
+  <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete -->
 </body>
 
 </html>

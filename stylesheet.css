@@ -4,12 +4,16 @@ body {
   width: 100vw;
 }
 
-#mainInput {
+.mainInput {
   background: #313131;
   color: #fff;
-  margin: auto;
   width: 100%;
-  height: 80vh;
+  padding: 0;
+}
+
+
+.mainInput:nth-child(odd) {
+  background: #444444;
 }
 
 .col{
@@ -61,4 +65,12 @@ body {
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+}
+
+.mainInputContainer{
+  display: block;
+}
+
+.mainInput{
+  border: 0;  
 }
