@@ -20,17 +20,29 @@ function convert(_decimal) {
     }
 };
 
+
+var input;
+var key;
+var knowns;
+function takeInput(strInput, key, knowns) {
+    input = strInputs;
+    this.key = key;
+    this.knowns = knowns;
+
+    this.input = "-1 * B + u0 * I / 2 / pi / d";
+
+    this.key = "I"; //UNKMNOWN VARIABLE
+    this.input = input.replace(key, "x");
+    this.knowns = new Map();
+    this.knowns.set("B", 5.1);
+    this.knowns.set("u0", 0.7);
+    this.knowns.set("pi", 3.14);
+    this.knowns.set("d", 0.5);
+}
+
 var Algebrite = require('algebrite');
 
-var input = "-1 * B + u0 * I / 2 / pi / d";
 
-var key = "I"; //UNKMNOWN VARIABLE
-input = input.replace(key, "x");
-var knowns = new Map();
-knowns.set("B", 5.1);
-knowns.set("u0", 0.7);
-knowns.set("pi", 3.14);
-knowns.set("d", 0.5);
 var splitString = input.split(" ");
 var substitutedStr = "";
 for (var i = 0; i < splitString.length; i++) {
