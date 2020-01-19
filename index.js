@@ -161,9 +161,7 @@ function stringInput(line, focus) {
         functionName = line.substring(1, line.length);
         if (functionName == "#") return "";
         else {
-            // console.log(data)
-            // console.log(getVariablesOfFunction(functionName,data))
-            return "";
+            return getVariablesOfFunction(functionName,data).join(", ");
         }
     }
 

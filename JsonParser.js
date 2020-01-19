@@ -21,7 +21,7 @@ function getNames(jsonObj) {
 }
 
 function getVariablesOfFunction(nameOfFunction, jsonObj) {
-    console.log(jsonObj)
+    // console.log(jsonObj)
     arrayOfMatchedName = [];
     tempArray = [];
     symbolArray = [];
@@ -30,14 +30,14 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
             arrayOfMatchedName = jsonObj[j];
         }
     }
-    console.log(arrayOfMatchedName);
+    // console.log(arrayOfMatchedName);
     for (j = 0; j < arrayOfMatchedName["Components"].length; j++) {
         tempArray.push(arrayOfMatchedName["Components"][j]);
     }
     for (j = 0; j < tempArray.length; j++) {
         symbolArray.push(tempArray[j]["Symbol"]);
     }
-    console.log(symbolArray);
+    // console.log(symbolArray);
     return symbolArray;
 }
 
