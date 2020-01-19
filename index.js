@@ -17,7 +17,8 @@
 ] * 
  */
 
-var input, output;
+var input;
+var output;
 // var varList = new Map();
 
 function findWord(word, str) {
@@ -30,9 +31,11 @@ function parseInput() {
   $(".overlay").html("");
   for (let lineNumber in input) {
     output = StringInput(input[lineNumber], lineNumber);
-    if (!findWord("function", output)){
+
+    console.log("runned")
+    if (!findWord("function", output)) {
       $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
-    } 
+    }
   }
 }
 
@@ -55,7 +58,12 @@ function StringInput(line, lineNumber) {
   // console.log(variables);
   // var calc = new MathCalc();
   // expr = calc.parse(line);
-  return math.eval(line, scope);
+  if(line.length<=0)return "";
+  try{
+    return math.eval(line, scope);
+  }catch(e){
+    return "error"
+  }
 
   // if (expr.error) {
   //     console.log(line + ' : ' + expr.error.text);
