@@ -1,21 +1,3 @@
-/**
- * List of keywords
- * Assignment: "is"
- * And: "and"
- * Addition: "plus", "add", "+"
- * Subtraction: "minus","subtract","-"
- * Multiplication: "times", "multiply", "*"
- * Division: "divide", "/" 
- * */
-
-/**
- * Topic selection: "topic"
- * Grab variables used in the topic and convert them to keywords
- * 
- * Topic is E&M
- * Define electric_potential as V
-] * 
- */
 var letter_size = 6;
 var input;
 var output;
@@ -42,9 +24,9 @@ function parseInput() {
 
 var focused;
 
-$(document).on('keydown, keyup, mousedown, mouseup', function () {
-  focused = $(':focus');
-  $('#box').css({'left': (letter_size*focused[0].selectionStart)+'px', 'top':$(focused).offset().top+$(focused).height()});
+$(document).on('keydown, keyup, mousedown, mouseup', function() {
+    focused = $(':focus');
+    $('#box').css({ 'left': (letter_size * focused[0].selectionStart) + 'px', 'top': $(focused).offset().top + $(focused).height() });
 })
 
 $(document).ready(function() {
@@ -98,15 +80,15 @@ $(".mainInputContainer").on('keydown', function(e) {
     }
 })
 
-$(".mainInputContainer").on('keyup', function (e) {
-  // console.log(e.which)
-  parseInput();
-  if (e.which == 13) {
-    //enter key
-    addNewLine();
-  }
-  focused = $(':focus');
-  $('#box').css({'left': (letter_size*focused[0].selectionStart)+'px', 'top':$(focused).offset().top+$(focused).height()});
+$(".mainInputContainer").on('keyup', function(e) {
+    // console.log(e.which)
+    parseInput();
+    if (e.which == 13) {
+        //enter key
+        addNewLine();
+    }
+    focused = $(':focus');
+    $('#box').css({ 'left': (letter_size * focused[0].selectionStart) + 'px', 'top': $(focused).offset().top + $(focused).height() });
 
 });
 
@@ -132,7 +114,8 @@ function StringInput(line, lineNumber) {
     // expr = calc.parse(line);
     if (line.length <= 0) return "";
     if (line[0] == '#') {
-
+        //TODO: pass shit from jsonparser to here
+        solveAlgebra();
     }
     try {
         return math.eval(line, scope);

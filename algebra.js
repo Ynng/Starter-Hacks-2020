@@ -28,9 +28,9 @@ var key = "I"; //UNKMNOWN VARIABLE
 input = input.replace(key, "x");
 var knowns = new Map();
 knowns.set("B", 5.1);
-knowns.set("u0", 4.11);
+knowns.set("u0", 0.7);
 knowns.set("pi", 3.14);
-knowns.set("d", 5);
+knowns.set("d", 0.5);
 var splitString = input.split(" ");
 var substitutedStr = "";
 for (var i = 0; i < splitString.length; i++) {
