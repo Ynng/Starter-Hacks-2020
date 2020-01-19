@@ -47,7 +47,7 @@ $(document).on('keydown, keyup, mousedown, mouseup', function () {
 })
 
 $(document).ready(function(){
-  $(".mainInput").focus();
+  $(".mainInput")[0].focus();
   focused = $(':focus');
 })
 
