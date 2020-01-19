@@ -40,13 +40,10 @@ function parseInput() {
   }
 }
 
-var focused
+var focused;
+
 $(document).on('keydown, keyup, mousedown, mouseup', function () {
   focused = $(':focus');
-})
-
-$(document).on('keydown, keyup', function () {
-  parseInput();
 })
 
 function addNewLine() {
@@ -59,6 +56,7 @@ function addNewLine() {
 
 $(".mainInputContainer").on('keyup', function (e) {
   console.log(e.which)
+  parseInput();
   if (e.which == 13) {
     //enter key
     addNewLine();
