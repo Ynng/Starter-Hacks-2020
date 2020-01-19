@@ -24,33 +24,18 @@ function convert(_decimal) {
 
 var input;
 var key;
-var knowns;
-
-function solveOld(strInput, key, knowns) {
-    input = strInputs;
-    this.key = key;
-    this.knowns = knowns;
-
-    this.input = "-1 * B + u0 * I / 2 / pi / d";
-
-    this.key = "I"; //UNKMNOWN VARIABLE
-    this.input = input.replace(key, "x");
-    this.knowns = new Map();
-    this.knowns.set("B", 5.1);
-    this.knowns.set("u0", 0.7);
-    this.knowns.set("pi", 3.14);
-    this.knowns.set("d", 0.5);
-}
 
 var Algebrite = require('algebrite');
 
 function solve(functionName, varMap) {
-    var splitString = input.split(" ");
+    var splitString = functionName.split(" ");
     var substitutedStr = "";
     for (var i = 0; i < splitString.length; i++) {
-        if (knowns.has(splitString[i])) {
+        if (varMap.has(splitString[i])) {
             //console.log(knowns.get(splitString[i]));
-            splitString[i] = convert(knowns.get(splitString[i]));
+            splitString[i] = convert(varMap.get(splitString[i]));
+        } else {
+            splitString[i] = "x";
         }
         substitutedStr += splitString[i];
         //console.log(substitutedStr);
@@ -61,11 +46,11 @@ function solve(functionName, varMap) {
     var sol = Algebrite.nroots(substitutedStr);
     //console.log(sol);
     if (sol.tensor == null) {
-        //console.log(sol.d);
+        console.log(sol.d);
     } else {
         for (var i = 0; i < sol.tensor.elem.length; i++) {
             //for when x has more than 1 answer
-            // console.log(sol.tensor.elem[i].d);
+            console.log(sol.tensor.elem[i].d);
         }
     }
 }

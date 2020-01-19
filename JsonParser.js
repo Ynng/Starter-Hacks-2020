@@ -41,15 +41,13 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
     return symbolArray;
 }
 
-function getFormula(nameOfFunction, jsonObj){
+function getFormula(nameOfFunction, jsonObj) {
     formulaStorage = "";
-    for(j=0; j < jsonObj.length; j++){
-        if(jsonObj[j]["Name"] == nameOfFunction){
+    for (j = 0; j < jsonObj.length; j++) {
+        if (jsonObj[j]["Name"] == nameOfFunction) {
             formulaStorage = jsonObj[j]["Formula"];
             break;
         }
     }
-    return formulaStorage;
+    return formulaStorage[0];
 }
-
-

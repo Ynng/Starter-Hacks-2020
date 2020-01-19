@@ -5,7 +5,7 @@
             { "Name": "Distance", "Symbol": "d" },
             { "Name": "Current", "Symbol": "I" }
         ],
-        "Formula": ["-1 * B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
+        "Formula": ["-1 * B + 4 * 10 ^ ( -1 * 7 ) * I / 2 / d"]
     },
     {
         "Name": "Gravitational force",
@@ -68,7 +68,7 @@
                 "Name": "Displacement",
                 "Symbol": "D"
             }
-        ], 
+        ],
         "Formula": ["D / T"]
     },
     {
@@ -98,7 +98,7 @@
                 "Name": "Change in Time",
                 "Symbol": "T"
             }
-        ], 
+        ],
         "Formula": ["Vf / T - Vi / T"]
     },
     {
@@ -115,7 +115,7 @@
                 "Name": "Change in Time",
                 "Symbol": "T"
             }
-        ], 
+        ],
         "Formula": ["Vf / 2 + Vi / 2"]
     }
 ]
