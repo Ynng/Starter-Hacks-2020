@@ -44,5 +44,44 @@
             }
         ],
         "Formula": ["-1 * E + 8.99 * 10 ^ 9 * Q / r ^ 2"]
+    },
+    {
+        "Name": "Displacement",
+        "Components": [{
+                "Name": "Change in Time",
+                "Symbol": "T"
+            },
+            {
+                "Name": "Velocity",
+                "Symbol": "v"
+            }
+        ],
+        "Formula": ["v * T"]
+    },
+    {
+        "Name": "Velocity",
+        "Components": [{
+                "Name": "Change in Time",
+                "Symbol": "T"
+            },
+            {
+                "Name": "Displacement",
+                "Symbol": "D"
+            }
+        ], 
+        "Formula": ["D / T"]
+    },
+    {
+        "Name": "Change in Time",
+        "Components": [{
+                "Name": "Displacement",
+                "Symbol": "T"
+            },
+            {
+                "Name": "Velocity",
+                "Symbol": "v"
+            }
+        ],
+        "Formula": ["D / T"]
     }
 ]
