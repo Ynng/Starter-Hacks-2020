@@ -5,7 +5,7 @@
             { "Name": "Distance", "Symbol": "d" },
             { "Name": "Current", "Symbol:": "I" }
         ],
-        "Formula": ["-B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
+        "Formula": ["-1 * B + 4 * 3.14 * 10 ^ -7 * I / 2 / 3.14 / d"]
     },
     {
         "Name": "Gravitational force",
@@ -26,6 +26,23 @@
                 "Symbol": "F"
             }
         ],
-        "Formula": ["-F + 6.674 * 10 ^ -11 * M * m / r ^ 2"]
+        "Formula": ["-1 * F + 6.674 * 10 ^ -11 * M * m / r ^ 2"]
+    },
+    {
+        "Name": "Electric Field Strength",
+        "Components": [{
+                "Name": "Electric Field Strength",
+                "Symbol": "E"
+            },
+            {
+                "Name": "Point Charge",
+                "Symbol": "Q"
+            },
+            {
+                "Name": "DIstance",
+                "Symbol": "r"
+            }
+        ],
+        "Formula": ["-1 * E + 8.99 * 10 ^ 9 * Q / r ^ 2"]
     }
 ]
