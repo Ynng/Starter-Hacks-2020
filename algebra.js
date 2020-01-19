@@ -1,7 +1,9 @@
 var Algebrite = require('algebrite');
 
-var input = "-1 * B + u0 * I / 2 / pi / d";
+var input = "-1 * B + u0 * I * x / 2 / pi / d";
 
+var key = "I"; //UNKMNOWN VARIABLE
+input = input.replace(key, "x");
 var knowns = new Map();
 knowns.set("B", 5.1);
 knowns.set("u0", 4.11);
@@ -17,5 +19,12 @@ for (var i = 0; i < splitString.length; i++) {
     console.log(substitutedStr);
 
 }
-
-console.log(Algebrite.nroots(substitutedStr).d);
+var sol = Algebritroots("x*x/2");
+console.log(sol);
+if (sol.tensor == null) {
+    console.log(sol.d);
+} else {
+    for (var i = 0; i < sol.tensor.elem.length; i++) {
+        console.log(sol.tensor.elem[i].d);
+    }
+}
