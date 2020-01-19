@@ -27,7 +27,9 @@ function convert(_decimal) {
 
 
 function solve(fN, varMap, key) {
-    fN = fN.replace(key, "x");
+    while(fN.indexOf(key)>-1){
+        fN = fN.replace(key, "x");
+    }
     var splitString = fN.split(" ");
     var substitutedStr = "";
     for (var i = 0; i < splitString.length; i++) {
@@ -44,12 +46,14 @@ function solve(fN, varMap, key) {
     var sol = Algebrite.nroots(substitutedStr);
     //console.log(sol);
     if (sol.tensor == null) {
-        console.log(sol.d);
+        return sol.d;
     } else {
+        tempA="";
         for (var i = 0; i < sol.tensor.elem.length; i++) {
             //for when x has more than 1 answer
-            console.log(sol.tensor.elem[i].d);
+            tempA=tempA + ", " + sol.tensor.elem[i].d;
         }
+        return tempA;
     }
 }
 
@@ -80,6 +84,7 @@ function parseInput() {
     scope = {};
     $(".overlay").html("");
     functionName = "#";
+    varMap.clear();
     for (ij = 0; ij < input.length; ij++) {
         output = stringInput($(input[ij]).val(), $(input[ij]).is(":focus"));
         if (!findWord("function", output)) {
@@ -225,6 +230,7 @@ function stringInput(line, focus) {
     }
 
     if (functionName == "#") {
+        varMap.clear();
         if (focus) {
             if (oldFunctionName != functionName) {
                 console.log("changed auto complete to functions")
@@ -253,9 +259,11 @@ function stringInput(line, focus) {
     if (functionName != "#") {
         if (variablesList.length > varMap.size + 1) {
             var splitStr = line.split("=")
-            if (focus && splitStr.length > 1 && splitStr[1] != "") {
-                varMap.set(splitStr[0], splitStr[1]);
+            if (splitStr.length > 1 && splitStr[1] != "") {
+                varMap.set(splitStr[0].trim(), splitStr[1].trim());
+                return splitStr[1].trim();
             }
+            return "";
         }
         if (variablesList.length == varMap.size + 1) {
             var uk;
@@ -265,9 +273,9 @@ function stringInput(line, focus) {
                     uk = variablesList[j];
                 }
             }
-            solve(formula, varMap, uk);
+            tempB = solve(formula, varMap, uk);
+            return tempB;
             //TODO: clear varmap when function task is ended
-            varMap.clear();
 
         }
     }

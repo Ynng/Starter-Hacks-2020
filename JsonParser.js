@@ -30,7 +30,7 @@ function getVariablesOfFunction(nameOfFunction, jsonObj) {
             arrayOfMatchedName = jsonObj[j];
         }
     }
-    // console.log(arrayOfMatchedName);
+    if(arrayOfMatchedName.length<=0)return [];
     for (j = 0; j < arrayOfMatchedName["Components"].length; j++) {
         tempArray.push(arrayOfMatchedName["Components"][j]);
     }
