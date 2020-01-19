@@ -3,3 +3,4 @@
 ## Acknowledgement
 
 [js-calc](https://paiv.github.io/blog/2016/03/23/js-calc)
+[algebrite](http://algebrite.org/)
