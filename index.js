@@ -25,19 +25,53 @@ function findWord(word, str) {
   return RegExp('\\b' + word + '\\b').test(str)
 }
 
+
 function parseInput() {
-  input = $('#mainInput').val().split('\n');
+  input = $('.mainInput');
   scope = {};
   $(".overlay").html("");
-  for (let lineNumber in input) {
-    output = StringInput(input[lineNumber], lineNumber);
+  for (i = 0; i < input.length; i++) {
+    // console.log($(input[i]).val())
+    output = StringInput($(input[i]).val(), i);
 
-    console.log("runned")
     if (!findWord("function", output)) {
-      $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
+      $(".overlay").html($(".overlay").html() + output + "</br>");
     }
   }
 }
+
+var focused
+$(document).on('keydown, keyup, mousedown, mouseup', function () {
+  focused = $(':focus');
+})
+
+$(document).on('keydown, keyup', function () {
+  parseInput();
+})
+
+function addNewLine() {
+  $('<input class="mainInput" type="text">').insertAfter(focused)
+}
+
+// $(".mainInput").on('input', function () {
+//   parseInput();
+// });
+
+$(".mainInputContainer").on('keyup', function (e) {
+  console.log(e.which)
+  if (e.which == 13) {
+    //enter key
+    addNewLine();
+    $(focused).next().focus();
+  }
+  if (e.which == 40) {
+    $(focused).next().focus();
+  }
+  if (e.which == 38) {
+    $(focused).prev().focus();
+  }
+  focused = $(':focus');
+});
 
 var scope = {};
 function StringInput(line, lineNumber) {
@@ -58,10 +92,10 @@ function StringInput(line, lineNumber) {
   // console.log(variables);
   // var calc = new MathCalc();
   // expr = calc.parse(line);
-  if(line.length<=0)return "empty";
-  try{
+  if (line.length <= 0) return "empty";
+  try {
     return math.eval(line, scope);
-  }catch(e){
+  } catch (e) {
     return "error"
   }
 
