@@ -22,51 +22,51 @@ var varList = new Map();
 
 function parseInput() {
 
-    input = $('#mainInput').val().split('\n');
-    $(".overlay").html("");
-    for (let lineNumber in input) {
-        $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
-    }
+  input = $('#mainInput').val().split('\n');
+  $(".overlay").html("");
+  for (let lineNumber in input) {
+    $(".overlay").html($(".overlay").html() + StringInput(input[lineNumber], lineNumber) + "</br>");
+  }
 }
 
-
+var scope = {};
 function StringInput(line, lineNumber) {
-    var params = line.split(" ");
-    console.log(params);
-    if (line.indexOf(" is ") > -1) {
-        var index = params.indexOf("is");
-        varList.set(params[index - 1], params[index + 1]);
-    } else {
-        var variables = new Map();
-        for (var i = 0; i < params.length; i++) {
-            if (varList.has(params[i])) {
-                console.log("here");
-                variables.set(params[i], recursiveSearch(params[i]));
-                console.log(variables);
-            }
-        }
-        console.log(variables);
-        var calc = new MathCalc();
-        expr = calc.parse(line);
-        return expr.eval(variables);
+  // var params = line.split(" ");
+  // console.log(params);
+  // if (line.indexOf(" is ") > -1) {
+  //     var index = params.indexOf("is");
+  //     varList.set(params[index - 1], params[index + 1]);
+  // } else {
+  //     var variables = new Map();
+  //     for (var i = 0; i < params.length; i++) {
+  //         if (varList.has(params[i])) {
+  //             console.log("here");
+  //             variables.set(params[i], recursiveSearch(params[i]));
+  //             console.log(variables);
+  //         }
+  //     }
+  // console.log(variables);
+  // var calc = new MathCalc();
+  // expr = calc.parse(line);
+  return math.eval(line,scope);
 
-        // if (expr.error) {
-        //     console.log(line + ' : ' + expr.error.text);
-        // } else {
-        //     var res = expr.eval();
-        //     console.log(line + ' = ' + res);
-        //     return res;
-        // }
-    }
+  // if (expr.error) {
+  //     console.log(line + ' : ' + expr.error.text);
+  // } else {
+  //     var res = expr.eval();
+  //     console.log(line + ' = ' + res);
+  //     return res;
+  // }
+  // }
 
 
 }
 
 function recursiveSearch(element) {
-    console.log("element: " + element + " " + varList.get(element));
-    if (Number(element) != NaN) {
-        return varList.get(element);
-    } else {
-        recursiveSearch(varList.get(element));
-    }
+  console.log("element: " + element + " " + varList.get(element));
+  if (Number(element) != NaN) {
+    return varList.get(element);
+  } else {
+    recursiveSearch(varList.get(element));
+  }
 }
