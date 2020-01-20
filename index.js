@@ -27,7 +27,7 @@ function convert(_decimal) {
 
 
 function solve(fN, varMap, key) {
-    while (fN.indexOf(key) > -1) {
+    while (fN.indexOf(key) >= 0) {
         fN = fN.replace(key, "x");
     }
     var splitString = fN.split(" ");
@@ -49,9 +49,9 @@ function solve(fN, varMap, key) {
         return sol.d;
     } else {
         tempA = "";
-        for (var i = 0; i < sol.tensor.elem.length; i++) {
+        for (bruh = 0; bruh < sol.tensor.elem.length; bruh++) {
             //for when x has more than 1 answer
-            tempA = tempA + ", " + sol.tensor.elem[i].d;
+            tempA = tempA + ", " + sol.tensor.elem[bruh].d;
         }
         return tempA;
     }
@@ -68,7 +68,7 @@ var data;
 /*An array containing all the country names in the world:*/
 var autoCompleteList, functionsList, variablesList;
 
-$.getJSON("PhysicsQuestions.json", function(jsonData) {
+$.getJSON("PhysicsQuestions.json", function (jsonData) {
     data = jsonData;
     functionsList = autoCompleteList = getNames(jsonData);
 });
@@ -85,10 +85,10 @@ function parseInput() {
     $(".overlay").html("");
     functionName = "#";
     varMap.clear();
-    nextLine="";
+    nextLine = "";
     for (ij = 0; ij < input.length; ij++) {
-        if(nextLine.length>0){
-            input[ij].value="";
+        if (nextLine.length > 0) {
+            input[ij].value = "";
             console.log("runned")
         }
         output = stringInput($(input[ij]).val(), $(input[ij]).is(":focus"));
@@ -106,12 +106,12 @@ function updateFocused() {
     }
 }
 
-$(document).on('keydown, keyup, mousedown, mouseup', function() {
+$(document).on('keydown, keyup, mousedown, mouseup', function () {
     updateFocused();
     $('#box').css({ 'left': (letter_size * focused[0].selectionStart) + 'px', 'top': $(focused).offset().top + $(focused).height() });
 })
 
-$(document).ready(function() {
+$(document).ready(function () {
     $(".mainInput")[0].focus();
     updateFocused();
 })
@@ -140,7 +140,7 @@ function removeLine() {
 //   parseInput();
 // });
 
-$(".mainInputContainer").on('keydown', function(e) {
+$(".mainInputContainer").on('keydown', function (e) {
     autocomplete = false;
     if (e.which == 17) {
         ctrl_key_down = true;
@@ -205,7 +205,7 @@ $(".mainInputContainer").on('keydown', function(e) {
 
 })
 
-$(".mainInputContainer").on('keyup', function(e) {
+$(".mainInputContainer").on('keyup', function (e) {
 
     if (e.which == 17) {
         ctrl_key_down = false;
@@ -225,12 +225,12 @@ var functionName = "#";
 var varMap = new Map();
 var nextLine, tempC;
 function stringInput(line, focus) {
-    
-    if (line.length <= 0 && !focus && nextLine.length<=0) return "";
-    console.log("tempC",nextLine);
-    if(nextLine.length>0){
+
+    if (line.length <= 0 && !focus && nextLine.length <= 0) return "";
+    console.log("tempC", nextLine);
+    if (nextLine.length > 0) {
         tempC = nextLine;
-        nextLine="";
+        nextLine = "";
         return tempC;
     }
     if (line[0] == '#' && line.length > 1) {
@@ -259,7 +259,7 @@ function stringInput(line, focus) {
         if (focus) {
             if (oldFunctionName != functionName) {
                 console.log("changed auto complete to variables")
-                    // console.log(getVariablesOfFunction(functionName, data));
+                // console.log(getVariablesOfFunction(functionName, data));
                 variablesList = getVariablesOfFunction(functionName, data);
                 autoCompleteList = variablesList;
                 oldFunctionName = functionName;
@@ -271,14 +271,13 @@ function stringInput(line, focus) {
     if (functionName != "#") {
         if (variablesList.length > varMap.size + 1) {
             var splitStr;
-            if (line.indexOf(" is ") > -1) {
-                splitStr = line.split(" is ");
 
-            } else {
-                splitStr = line.split("=");
-            }
+            splitStr = line.split("=");
             if (splitStr.length > 1 && splitStr[1] != "") {
-                varMap.set(splitStr[0].trim(), splitStr[1].trim());
+                console.log(splitStr[1].trim().length);
+                if(splitStr[1].trim().length>0){
+                    varMap.set(splitStr[0].trim(), splitStr[1].trim());
+                }
             }
             if (variablesList.length == varMap.size + 1) {
                 var uk;
@@ -289,14 +288,17 @@ function stringInput(line, focus) {
                     }
                 }
                 tempB = solve(formula, varMap, uk);
-                nextLine = tempB.toString();
+                nextLine = uk + " is " + tempB.toString();
                 console.log(nextLine);
                 //TODO: clear varmap when function task is ended
             }
             if (splitStr.length > 1 && splitStr[1] != "") {
-                return splitStr[1].trim();
+                if(splitStr[1].trim().length>0){
+                    return splitStr[1].trim();
+                }
             }
-        }else{
+            return "";
+        } else {
             return ""
         }
     }
@@ -333,7 +335,7 @@ function autocomplete_input_change(arr, keycode) {
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function(e) {
+            b.addEventListener("click", function (e) {
                 /*insert the value for the autocomplete text field:*/
                 $(focused)[0].value = this.children[1].value;
                 /*close the list of autocompleted values,
@@ -377,6 +379,6 @@ function closeAllLists(elmnt) {
     }
 }
 /*execute a function when someone clicks in the document:*/
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });

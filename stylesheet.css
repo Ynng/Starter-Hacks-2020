@@ -110,6 +110,7 @@ body {
 
 .mainInput {
   border: 0;
+  padding-left: 5px;
 }
 
 #box {
