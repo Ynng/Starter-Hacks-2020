@@ -11,6 +11,6 @@ Made for [Starter Hacks 2020](https://starterhacks.ca)
 [algebrite](http://algebrite.org/)
 
 ## Team Members
-Derrick Yang|Frank Ye|Kevin Huang|Owen Hu|Peter Jiang|
+|Derrick Yang|Frank Ye|Kevin Huang|Owen Hu|Peter Jiang|
 |---|---|---|---|---|
 | |![](https://avatars1.githubusercontent.com/u/43357430?s=60&v=4)|![](https://avatars2.githubusercontent.com/u/44907675?s=60&v=4)|![](https://avatars0.githubusercontent.com/u/45834630?s=60&v=4)|![](https://avatars0.githubusercontent.com/u/47200772?s=60&v=4)
